@@ -1,1 +1,43 @@
+body {
+  font-family: system-ui, sans-serif;
+  background: #fdfdfd;
+  color: #222;
+  margin: 0;
+  padding: 2rem;
+  line-height: 1.6;
+}
+
+main {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.2em;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #888;
+  margin-bottom: 2rem;
+}
+
+.ethos {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+}
+
+nav a, a {
+  display: inline-block;
+  margin-right: 1rem;
+  text-decoration: none;
+  color: #0066cc;
+}
+
+a:hover {
+  text-decoration: underline;
+}
 
