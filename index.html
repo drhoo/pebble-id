@@ -3,59 +3,777 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pebble ID — Simple. Trusted. Yours.</title>
 
-  <!-- SEO -->
-  <meta name="description" content="Pebble ID is a quiet system for ownership, identity, and trust — for people and things. Simple. Trusted. Yours." />
-  <meta name="author" content="Pebble ID" />
+  <title>Pebble — Trust made simple.</title>
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Pebble ID — Simple. Trusted. Yours." />
-  <meta property="og:description" content="A quiet system for marking what matters — for objects and individuals alike. Privacy-first by design." />
+  <meta
+    name="description"
+    content="Pebble builds simple, trusted QR systems for contact, help, return and verification — with minimum data, clear purpose and no unnecessary tracking."
+  />
+
+  <meta name="author" content="Pebble" />
+
+  <meta property="og:title" content="Pebble — Trust made simple." />
+  <meta
+    property="og:description"
+    content="Simple QR tools that help people connect, return, verify and act — without unnecessary tracking or exposure."
+  />
   <meta property="og:image" content="https://pebble.id/assets/pebble-hq.png" />
   <meta property="og:url" content="https://pebble.id/" />
   <meta property="og:type" content="website" />
 
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Pebble ID" />
-  <meta name="twitter:description" content="Trusted identity for people and things — without the noise." />
+  <meta name="twitter:title" content="Pebble — Trust made simple." />
+  <meta
+    name="twitter:description"
+    content="Simple QR tools for people and things. Minimum data. Clear purpose. No tricks."
+  />
   <meta name="twitter:image" content="https://pebble.id/assets/pebble-hq.png" />
 
-  <!-- Favicon -->
   <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    :root {
+      --ink: #171717;
+      --muted: #60656a;
+      --teal: #197f82;
+      --teal-soft: #e9f5f5;
+      --cream: #fbfaf7;
+      --white: #ffffff;
+      --line: #e6e4df;
+      --sand: #f1ede6;
+      --shadow: 0 18px 50px rgba(0,0,0,0.07);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+      line-height: 1.55;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      text-decoration: none;
+      font-size: 1.65rem;
+      font-weight: 900;
+      letter-spacing: -0.045em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal);
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 78% 25%, rgba(25,127,130,0.12), transparent 28%),
+        linear-gradient(135deg, #fff 0%, #fbfaf7 58%, #eef7f7 100%);
+    }
+
+    .hero-inner {
+      min-height: 650px;
+      display: grid;
+      grid-template-columns: 1fr 0.95fr;
+      gap: 70px;
+      align-items: center;
+      padding: 72px 0 88px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: var(--teal-soft);
+      color: var(--teal);
+      font-size: 0.8rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3.4rem, 8vw, 6.6rem);
+      line-height: 0.92;
+      letter-spacing: -0.065em;
+      font-weight: 950;
+    }
+
+    .hero h2 {
+      margin: 20px 0 18px;
+      color: var(--teal);
+      font-size: clamp(1.7rem, 3vw, 2.45rem);
+      line-height: 1.08;
+    }
+
+    .hero-copy {
+      max-width: 670px;
+      color: #333;
+      font-size: 1.2rem;
+    }
+
+    .hero-principles {
+      margin: 28px 0 0;
+      font-weight: 750;
+    }
+
+    .hero-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .image-card {
+      width: min(500px, 100%);
+      background: white;
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      padding: 20px;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .image-card img {
+      width: 100%;
+      border-radius: 20px;
+    }
+
+    section {
+      padding: 92px 0;
+    }
+
+    .section-title {
+      max-width: 760px;
+      margin: 0 auto 52px;
+      text-align: center;
+    }
+
+    .section-title h2 {
+      margin: 0 0 12px;
+      font-size: clamp(2.1rem, 4vw, 3.2rem);
+      letter-spacing: -0.045em;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .products {
+      background: white;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .product {
+      background: var(--cream);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .product-label {
+      color: var(--teal);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .product h3 {
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+    }
+
+    .product p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .architecture {
+      background:
+        linear-gradient(135deg, #edf8f8 0%, #f8fbfb 55%, #fbfaf7 100%);
+    }
+
+    .architecture-card {
+      background: rgba(255,255,255,0.88);
+      border: 1px solid rgba(255,255,255,0.95);
+      border-radius: 30px;
+      padding: clamp(30px, 6vw, 60px);
+      box-shadow: var(--shadow);
+    }
+
+    .architecture-card h2 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.045em;
+    }
+
+    .architecture-card p {
+      max-width: 820px;
+      font-size: 1.08rem;
+    }
+
+    .architecture-line {
+      margin-top: 24px;
+      padding: 18px 20px;
+      background: var(--teal-soft);
+      border-radius: 15px;
+      color: var(--teal);
+      font-weight: 850;
+    }
+
+    .principles {
+      background: white;
+    }
+
+    .principle-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .principle {
+      padding: 26px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: var(--cream);
+    }
+
+    .principle h3 {
+      margin: 0 0 8px;
+    }
+
+    .principle p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .quiet {
+      background: var(--sand);
+    }
+
+    .quiet-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .quiet-inner h2 {
+      margin: 0 0 18px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.045em;
+    }
+
+    .quiet-inner p {
+      font-size: 1.1rem;
+      color: #4d4a45;
+    }
+
+    .quiet-line {
+      margin-top: 26px;
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--teal);
+    }
+
+    footer {
+      padding: 44px 0 30px;
+      background: #e8e3db;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+    }
+
+    footer h3 {
+      margin-top: 0;
+    }
+
+    footer p {
+      color: #5a554f;
+    }
+
+    .footer-bottom {
+      margin-top: 36px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: #6c665e;
+      font-size: 0.88rem;
+    }
+
+    .footer-bottom a {
+      color: var(--teal);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 34px;
+      }
+
+      .product-grid,
+      .principle-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+
+      .product-grid,
+      .principle-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-inner {
+        padding: 54px 0 70px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <main>
-    <img src="assets/pebble-hq.png" alt="Pebble Logo" class="hq-image" />
 
-    <h1>Pebble ID</h1>
-    <p class="tagline">Mark what matters. Return what’s lost. Trust what you see.</p>
+<header>
+  <div class="wrap nav">
 
-    <section class="intro">
-      <p>
-        Pebble is a quiet system for ownership and identity — designed for people, objects, and trust itself. 
-        Built in Australia. Privacy-first by design. No accounts. No surveillance. Just simple tools that do what they say.
-      </p>
-      <p>
-        With multiple patents pending, Pebble is rethinking everyday tech — from identity to ownership to trust. We design from first principles, not hype.
-      </p>
-      <p>
-        Whether you’re tagging a bag, certifying an item, or building a safer future, Pebble is ready.
-      </p>
-    </section>
+    <a class="brand" href="/">
+      Pebble
+    </a>
 
-    <nav>
+    <nav class="nav-links">
+      <a href="#products">Products</a>
+      <a href="#qc1">QC-1</a>
+      <a href="#principles">Principles</a>
       <a href="about.html">About</a>
-      <a href="privacy-policy.html">Privacy Policy</a>
     </nav>
-  </main>
 
-  <footer>
-    <p>&copy; 2025 Pebble ID. All rights reserved.</p>
-  </footer>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+
+    <div class="wrap hero-inner">
+
+      <div>
+
+        <div class="eyebrow">
+          Human-scale technology
+        </div>
+
+        <h1>
+          Pebble
+        </h1>
+
+        <h2>
+          Trust made simple.
+        </h2>
+
+        <p class="hero-copy">
+          Pebble builds simple QR tools that help people connect,
+          return, verify and act — without unnecessary tracking,
+          exposure or complexity.
+        </p>
+
+        <p class="hero-principles">
+          Minimum data. Clear purpose. No tricks.
+        </p>
+
+      </div>
+
+
+      <div class="hero-image">
+
+        <div class="image-card">
+          <img
+            src="assets/pebble-hq.png"
+            alt="Pebble"
+          >
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="products" id="products">
+
+    <div class="wrap">
+
+      <div class="section-title">
+
+        <h2>
+          One trust layer. Several useful products.
+        </h2>
+
+        <p>
+          Different jobs, built around the same idea:
+          scan, understand, act.
+        </p>
+
+      </div>
+
+
+      <div class="product-grid">
+
+        <div class="product">
+
+          <div class="product-label">
+            First product
+          </div>
+
+          <h3>
+            BeachBand
+          </h3>
+
+          <p>
+            A waterproof QR help band for people and belongings.
+            Scan to contact the owner without exposing a phone number.
+          </p>
+
+        </div>
+
+
+        <div class="product">
+
+          <div class="product-label">
+            Safe contact
+          </div>
+
+          <h3>
+            Sendezi
+          </h3>
+
+          <p>
+            Safe first contact.
+            Be reachable without being exposed.
+          </p>
+
+        </div>
+
+
+        <div class="product">
+
+          <div class="product-label">
+            Trust architecture
+          </div>
+
+          <h3>
+            QC-1
+          </h3>
+
+          <p>
+            Quick Check One.
+            The internal QR trust profile behind Pebble public interactions.
+          </p>
+
+        </div>
+
+
+        <div class="product">
+
+          <div class="product-label">
+            Verification
+          </div>
+
+          <h3>
+            Vera.ID
+          </h3>
+
+          <p>
+            A later verification and proof layer for trusted routes,
+            evidence and simple YES / ? / NO decisions.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="architecture" id="qc1">
+
+    <div class="wrap">
+
+      <div class="architecture-card">
+
+        <div class="eyebrow">
+          QC-1
+        </div>
+
+        <h2>
+          The QR is the doorway, not the warehouse.
+        </h2>
+
+        <p>
+          Pebble keeps public QR codes simple and predictable.
+          The code points to a short trusted route.
+          The intelligence stays in the backend.
+        </p>
+
+        <p>
+          That lets the same familiar interaction support contact,
+          help, return, verification, check-in and other useful actions
+          without turning the printed QR into a dense block of data.
+        </p>
+
+        <div class="architecture-line">
+          One code. One clear purpose. One trusted route.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="principles" id="principles">
+
+    <div class="wrap">
+
+      <div class="section-title">
+
+        <h2>
+          Built around restraint.
+        </h2>
+
+        <p>
+          Just because technology can collect more does not mean it should.
+        </p>
+
+      </div>
+
+
+      <div class="principle-grid">
+
+        <div class="principle">
+
+          <h3>
+            Minimum data
+          </h3>
+
+          <p>
+            Collect only what is needed for the stated purpose.
+          </p>
+
+        </div>
+
+
+        <div class="principle">
+
+          <h3>
+            No unnecessary tracking
+          </h3>
+
+          <p>
+            Pebble is not designed to build movement or behaviour profiles.
+          </p>
+
+        </div>
+
+
+        <div class="principle">
+
+          <h3>
+            Clear purpose
+          </h3>
+
+          <p>
+            The person scanning should know why they are scanning and what happens next.
+          </p>
+
+        </div>
+
+
+        <div class="principle">
+
+          <h3>
+            Human choice
+          </h3>
+
+          <p>
+            Use the technology when you need it.
+            Leave it alone when you do not.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="quiet">
+
+    <div class="wrap">
+
+      <div class="quiet-inner">
+
+        <h2>
+          Quiet until useful.
+        </h2>
+
+        <p>
+          Pebble is designed to sit quietly in the background.
+          No engagement hooks. No attention capture.
+          No requirement to keep opening an app just to prove the service has value.
+        </p>
+
+        <div class="quiet-line">
+          Activate it once. Let it sit quietly. If help is ever needed, Pebble is there.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <div class="wrap">
+
+    <div class="footer-grid">
+
+      <div>
+
+        <h3>
+          Pebble
+        </h3>
+
+        <p>
+          Simple, trusted interaction tools for people and things.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h3>
+          Built in Australia
+        </h3>
+
+        <p>
+          Developed with a focus on clarity, privacy,
+          practical usefulness and human trust.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 Pebble.
+      </span>
+
+      <span>
+        <a href="about.html">About</a>
+        &nbsp;·&nbsp;
+        <a href="privacy-policy.html">Privacy</a>
+        &nbsp;·&nbsp;
+        Trust made simple.
+      </span>
+
+    </div>
+
+  </div>
+
+</footer>
+
 </body>
 </html>
